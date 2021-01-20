@@ -1,0 +1,4 @@
+# Nmap 7.91 scan initiated Mon Jan  4 00:41:01 2021 as: nmap -sC -sV -O -oA nmap/initial 10.129.37.105
+Host: 10.129.37.105 ()	Status: Up
+Host: 10.129.37.105 ()	Ports: 80/open/tcp//http//Apache httpd 2.4.18 ((Ubuntu))/	Ignored State: closed (999)	Seq Index: 262	IP ID Seq: All zeros
+# Nmap done at Mon Jan  4 00:41:31 2021 -- 1 IP address (1 host up) scanned in 30.67 seconds
