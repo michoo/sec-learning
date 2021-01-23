@@ -118,7 +118,7 @@ cd default_kali_keys/
 md5sum *
 ```
 
-### Ip forwarding
+### Ip forwarding on your host machine and into your kali machine
 
 #### Check
 
