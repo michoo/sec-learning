@@ -10,7 +10,7 @@
 
 - Lame
 - brainfuck
-- shocker: NEXT TODO https://www.youtube.com/watch?v=IBlTdguhgfY
+- shocker: 27/01/2021 - easy
 - bashed: 03/01/2021 - easy
 - nibbles
 - beep
