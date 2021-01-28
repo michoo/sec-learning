@@ -8,12 +8,12 @@
 
 ## Linux Boxes
 
-- Lame
+- Lame: TODO
 - brainfuck
 - shocker: 27/01/2021 - easy
 - bashed: 03/01/2021 - easy
 - nibbles
-- beep
+- beep: 28/01/2021 - easy
 - cronos
 - nineveh
 - sense
@@ -28,10 +28,10 @@
 - Swagshop
 - Networked
 - jarvis
-- Mirai
+- Mirai: TODO
 - Popcorn
 - Haircut
-- Blocky
+- Blocky: TODO
 - Frolic
 - Postman
 - Mango

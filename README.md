@@ -25,6 +25,10 @@ Directory that contains all soluce from VM scheduled
 
 ## Inspiration
 
+### Interesting hackthebox tuto
+
+https://hackso.me/intense-htb-walkthrough/  
+
 ### Experience OSCP
 
 https://rana-khalil.gitbook.io/hack-the-box-oscp-preparation/
