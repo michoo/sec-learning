@@ -30,7 +30,7 @@ Only this machine (10.129.87.168 ) with specific tools
 
 - nmap
 - masscan
-- nc
+- ssh
 
 # High-Level Summary
 
@@ -70,7 +70,7 @@ Lateral Movement:
 
 Collection:  
 
-- N/A 
+- N/A  
 
 Command and Control:  
 
@@ -89,9 +89,9 @@ Impact:
 I recommend patching the vulnerabilities identified during the testing to ensure that an attacker cannot exploit these systems in the future.
 One thing to remember is that these systems require frequent patching and once patched, should remain on a regular patch program to protect additional vulnerabilities that are discovered at a later date.  
 
-Also, I recommend a better management of granted access for framework like perl to avoid root execution without password for any user.  
+Also, I recommend a better management of granted access for software to avoid root execution (if possible).  
 
-Check other recommendations at the end of this document. 
+Check other recommendations at the end of this document.  
 
 # Soluces
 
@@ -124,17 +124,16 @@ sudo openvpn file.ovpn
 ```
 
 ## System IP: 10.129.87.168  
+
 ### Enumeration
 
-First scan on all ports on tcp and udp
+First scan on all ports on tcp and udp  
+
 ```bash
 sudo masscan -p1-65535,U:1-65535 10.129.87.168 --rate=500
 ```
 
-Second finest scan with [Nmap](https://hackertarget.com/nmap-cheatsheet-a-quick-reference-guide/) 
-```bash
-nmap -n -v -Pn -sS -sU -pT:22,80,U:161 -A --reason 10.129.87.168 -oN nmap.txt
-```
+-> only 53... strange, let's use nmap  
 
 ```bash
 mkdir nmap
@@ -155,7 +154,7 @@ sudo nmap -sC -sV -O -oA nmap/initial 10.129.87.168
 
 #### Web Services
 
-On port 80:  
+On port 443:  
 ![Elastix](images/TLS1-Screenshot_2021-01-28_14-45-03.png)
 
 ```bash
@@ -166,10 +165,10 @@ NB: check folder /usr/share/wfuzz/wordlist/
 
 -> nothing really usefull (sorry no printscreen)
 
-
 #### Other Services
 
 #### Harvested Informations
+
 Seems that is a web application for an IPBX solution called Elastix.
 
 By navigating we tried simply http://10.129.87.168/admin/ and we found:  
@@ -184,7 +183,6 @@ We gathered a version information
 
 -> freePBX version is 2.8.1.4
 
-
 #### Vuln Investigation
 
 ##### Check for exploits
@@ -193,12 +191,11 @@ We gathered a version information
 searchsploit --id freepbx
 searchsploit --id elastix
 ```
+
 ![freepbx results](images/freePBX-Screenshot_2021-01-28_15-04-13.png)
 ![elastix results](images/Elastix-Screenshot_2021-01-28_15-04-37.png)
 
 tried some but this one is good for elastix https://www.exploit-db.com/exploits/37637
-
-
 
 ##### Check for informations on web
 
@@ -237,7 +234,6 @@ On Elastix:
 ![the good mysql config](images/Elastix-mysql-config-Screenshot_2021-01-28_15-31-56.png)  
 ![some try on backup conf file but not downloadable directly, I have to dig into doc if necessary](images/backup-confiles-Screenshot_2021-01-28_15-25-46.png)  
 
-
 -> nothing
 
 Let's check ssh with admin/jEhdIekWmdjE
@@ -245,8 +241,6 @@ Let's check ssh with admin/jEhdIekWmdjE
 with admin it's not working, let's try with root as in java ssh and same password
 
 ![And boom!](images/root-Screenshot_2021-01-28_15-51-59.png)
-
-
 
 ### Post exploitation
 
@@ -294,11 +288,13 @@ cat root.txt
 **Proof Screenshot Here:**
 
 **Proof.txt Contents:**
+
 ```bash
 [root@beep ~] cat root.txt 
 fb691079a0a90338eb4541aafe21----
 
 ```
+
 ## Maintaining Access
 
 Maintaining access to a system is important to us as attackers, ensuring that we can get back into a system after it has been exploited is invaluable.
@@ -317,15 +313,16 @@ Offensive Security should not have to remove any user accounts or services from 
 # Detailed Recommandations
 
 ## Technical
+
 - no opening ssh to root
 - patching old version
-
+- no admin of software has to be root
 
 ## Governance
 
 ## Blue team
-- ???
 
+- ???
 
 # Additional Items
 
@@ -334,4 +331,3 @@ Offensive Security should not have to remove any user accounts or services from 
 IP (Hostname) | Local.txt Contents | Proof.txt Contents
 --------------|--------------------|-------------------
 10.129.87.168  | N/A          | fb691079a0a90338eb4541aafe21----
-
