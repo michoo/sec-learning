@@ -14,8 +14,9 @@ Your first CTF :)
 ## Prepare your pentest lab
 [kali](kali.md)
 
-## Reports
+## Reports and methods
 [reports](reports.md)
+[methods](https://wiki.owasp.org/index.php/Penetration_testing_methodologies)
 
 ## Schedule
 All VM to analyze in OSCP context
@@ -24,6 +25,10 @@ All VM to analyze in OSCP context
 Directory that contains all soluce from VM scheduled
 
 ## Inspiration
+
+### CTF ressources
+https://www.tutorialspoint.com/ethical_hacking/
+https://d00mfist.gitbooks.io
 
 ### Interesting hackthebox tuto
 
