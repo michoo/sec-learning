@@ -25,6 +25,10 @@ Directory that contains all soluce from VM scheduled
 
 ## Inspiration
 
+### CTF ressources
+https://www.tutorialspoint.com/ethical_hacking/
+https://d00mfist.gitbooks.io
+
 ### Interesting hackthebox tuto
 
 https://hackso.me/intense-htb-walkthrough/  
