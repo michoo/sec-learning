@@ -14,8 +14,9 @@ Your first CTF :)
 ## Prepare your pentest lab
 [kali](kali.md)
 
-## Reports
+## Reports and methods
 [reports](reports.md)
+[methods](https://wiki.owasp.org/index.php/Penetration_testing_methodologies)
 
 ## Schedule
 All VM to analyze in OSCP context
