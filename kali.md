@@ -16,6 +16,9 @@ sha256sum file.zip
 
 Unzip and import ova file into Virtualbox.
 
+## kali.training book
+https://kali.training/downloads/Kali-Linux-Revealed-2021-edition.pdf  
+
 ## Configuration of downloaded VM
 
 - remove all useless stuff in vm configuration (A:, CD,..)
@@ -48,6 +51,27 @@ sudo apt install clamav clamtk
 ```
 
 Why not...
+
+## fail2ban
+```bash
+sudo apt fail2ban
+
+```
+
+## rootkit protection
+
+Consider the use of rkhunter, checksecurity, and chkrootkit
+
+## AIDE
+Advanced Intrusion Detection Environment (AIDE) tool checks file integrity and detects any changes against a previously-recorded image of the valid system
+
+## Deactivate non necessary services 
+
+to list all services status 
+```bash
+sudo systemctl list-unit-files
+```
+
 
 ## Change macadress
 
