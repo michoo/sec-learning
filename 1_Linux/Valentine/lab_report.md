@@ -271,6 +271,19 @@ IT'S FOR HYPE USER.....
 ![user flag](image/Screenshot_2021-04-20_23-05-27-flag.png)
 e6710a5464769fd5fcd216e076961750
 
+linenum
+
+python -m SimpleHTTPServer 8000
+
+
+and some results.
+
+![indices1](image/Screenshot_2021-04-20_23-10-24-linenum-indice1.png)
+![indices2](image/Screenshot_2021-04-20_23-10-24-linenum-indice2.png)
+![indices3](image/Screenshot_2021-04-20_23-10-24-linenum-indice3.png)
+![indices4](image/Screenshot_2021-04-20_23-10-24-linenum-indice4.png)
+
+
 
 php remote code injection? with encoding and decoding 
 
