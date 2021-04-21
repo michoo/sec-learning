@@ -1,0 +1,39 @@
+# Nmap 7.91 scan initiated Tue Apr 20 20:13:41 2021 as: nmap --script smb-vuln-ms17-010 -oA nmap/initial -v 10.129.134.96
+Nmap scan report for 10.129.134.96
+Host is up (0.20s latency).
+Not shown: 985 closed ports
+PORT      STATE    SERVICE
+43/tcp    filtered whois
+135/tcp   open     msrpc
+139/tcp   open     netbios-ssn
+445/tcp   open     microsoft-ds
+1041/tcp  filtered danf-ak2
+1055/tcp  filtered ansyslmd
+1085/tcp  filtered webobjects
+1186/tcp  filtered mysql-cluster
+10010/tcp filtered rxapi
+49152/tcp open     unknown
+49153/tcp open     unknown
+49154/tcp open     unknown
+49155/tcp open     unknown
+49156/tcp open     unknown
+49157/tcp open     unknown
+
+Host script results:
+| smb-vuln-ms17-010: 
+|   VULNERABLE:
+|   Remote Code Execution vulnerability in Microsoft SMBv1 servers (ms17-010)
+|     State: VULNERABLE
+|     IDs:  CVE:CVE-2017-0143
+|     Risk factor: HIGH
+|       A critical remote code execution vulnerability exists in Microsoft SMBv1
+|        servers (ms17-010).
+|           
+|     Disclosure date: 2017-03-14
+|     References:
+|       https://blogs.technet.microsoft.com/msrc/2017/05/12/customer-guidance-for-wannacrypt-attacks/
+|       https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-0143
+|_      https://technet.microsoft.com/en-us/library/security/ms17-010.aspx
+
+Read data files from: /usr/bin/../share/nmap
+# Nmap done at Tue Apr 20 20:14:11 2021 -- 1 IP address (1 host up) scanned in 29.76 seconds

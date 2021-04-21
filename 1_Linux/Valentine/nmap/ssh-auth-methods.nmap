@@ -1,0 +1,15 @@
+# Nmap 7.91 scan initiated Tue Apr 20 21:08:11 2021 as: nmap --script ssh-auth-methods -oA nmap/ssh-auth-methods -v 10.129.1.190
+Nmap scan report for 10.129.1.190
+Host is up (0.20s latency).
+Not shown: 997 closed ports
+PORT    STATE SERVICE
+22/tcp  open  ssh
+| ssh-auth-methods: 
+|   Supported authentication methods: 
+|     publickey
+|_    password
+80/tcp  open  http
+443/tcp open  https
+
+Read data files from: /usr/bin/../share/nmap
+# Nmap done at Tue Apr 20 21:09:02 2021 -- 1 IP address (1 host up) scanned in 51.55 seconds
