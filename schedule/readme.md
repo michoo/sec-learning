@@ -8,7 +8,7 @@
 
 ## Linux Boxes
 
-- Lame: TODO
+- Lame
 - brainfuck
 - shocker: 27/01/2021 - easy
 - bashed: 03/01/2021 - easy
@@ -18,20 +18,20 @@
 - nineveh
 - sense
 - solidstate
-- node
-- valentine
-- poison
-- sunday
+- node: 21/04/2021 - medium
+- valentine: 21/04/2021 - medium
+- poison: TODO
+- sunday: TODO
 - tartarsauce
 - Irked
 - Friendzone
 - Swagshop
 - Networked
 - jarvis
-- Mirai: TODO
+- Mirai: 28/02/2021 - easy
 - Popcorn
 - Haircut
-- Blocky: TODO
+- Blocky
 - Frolic
 - Postman
 - Mango
@@ -46,7 +46,7 @@
 ## Windows Boxes
 
 - legacy
-- Blue
+- Blue: 21/04/2021 - easy
 - Devel
 - Optimum
 - Bastard
@@ -55,16 +55,16 @@
 - grandpa
 - silo
 - bounty
-- jerry
+- jerry: TODO
 - conceal
-- chatterbox
-- Forest
+- chatterbox: TODO
+- Forest: TODO
 - BankRobber
 - secnotes
 - Bastion
 - Buff
 - Servmon
-- Active
+- Active: TODO
 - Remote
 - Fuse
 
@@ -105,6 +105,13 @@
 - Doctor [Linux]
 - Quick [Linux]
 - BlackField [Windows]
+
+
+## FoR fUn
+
+- Ophiuchi: TODO
+- Bucket: TODO
+
 
 ## OSWE
 
