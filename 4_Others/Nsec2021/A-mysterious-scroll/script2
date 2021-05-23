@@ -1,0 +1,21 @@
+x = "abcdefghijklmnopqrstuvwxyz1234567891-"  
+r= int(x[30])
+j = r+r+1
+h = r-r
+i = j-r+h
+k = i*i+h
+p = j-r-r+j-r-r+j-r-r+j-r-r+j-r-r+j-r-r+j-r-r+j-r-r
+g =(r-((j-r-r)*(j-r-r+j-r-r)))*j
+f = int(j+h+h+(p*h)+i/(j-r-r-r+j-r))
+e = f+j-r-r-r+j-r+j-r-r
+d = int(str(k)[h+j-r-r-(1)]+str(k)[h])
+q = len(x)-j
+m = int((q+d*h)/(k-(q+p)))
+b = q+(f-m)
+n = int((k-(q+p))/(j-r-r))
+c = (d-g)+j+j-i+r
+u = e+(k-(q +p))
+s = int(x[(g-i+r)])
+t = int(str(j)[g-d])+str(m)[u-(s+s+r)]
+a = int((p*(e-f)-n))
+print(x[r]+x[j]+x[h]+x[i]+x[k]+x[p]+x[g]+x[f]+x[e]+x[d]+x[q]+x[m]+x[b]+x[n]+x[c]+x[u]+x[s]+x[t]+x[a])

@@ -1,0 +1,21 @@
+x = "abcdefghijklmnopqrstuvwxyz1234567891-"  
+7x= int(x[30])
+1x = 7x+7x+1
+15x = 7x-7x
+10x = 1x-7x+15x
+2x = 10x*10x+15x
+5x = 1x-7x-7x+1x-7x-7x+1x-7x-7x+1x-7x-7x+1x-7x-7x+1x-7x-7x+1x-7x-7x+1x-7x-7x
+12x =(7x-((1x-7x-7x)*(1x-7x-7x+1x-7x-7x)))*1x
+11x = int(1x+15x+15x+(5x*15x)+10x/(1x-7x-7x-7x+1x-7x))
+16x = 11x+1x-7x-7x-7x+1x-7x+1x-7x-7x
+13x = int(str(2x)[15x+1x-7x-7x-(1)]+str(2x)[15x])
+6x = len(x)-1x
+3x = int((6x+13x*15x)/(2x-(6x+5x)))
+18x = 6x+(11x-3x)
+4x = int((2x-(6x+5x))/(1x-7x-7x))
+17x = (13x-12x)+1x+1x-10x+7x
+0x = 16x+(2x-(6x +5x))
+8x = int(x[(12x-10x+7x)])
+9x = int(str(1x)[12x-13x]+str(3x)[0x-(8x+8x+7x)])
+14x = int((5x*(16x-11x)-4x))
+print(x[7x]+x[1x]+x[15x]+x[10x]+x[2x]+x[5x]+x[12x]+x[11x]+x[16x]+x[13x]+x[6x]+x[3x]+x[18x]+x[4x]+x[17x]+x[0x]+x[8x]+x[9x]+x[14x])

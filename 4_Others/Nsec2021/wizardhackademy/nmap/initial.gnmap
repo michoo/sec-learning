@@ -1,0 +1,4 @@
+# Nmap 7.91 scan initiated Sat May 22 21:49:18 2021 as: nmap -sC -sV -O -oA nmap/initial -Pn -6 9000:470:b2b5:cafe:216:3eff:feb9:98b1
+Host: 9000:470:b2b5:cafe:216:3eff:feb9:98b1 ()	Status: Up
+Host: 9000:470:b2b5:cafe:216:3eff:feb9:98b1 ()	Ports: 80/open/tcp//http//Apache httpd 2.4.41 ((Ubuntu))/	Ignored State: closed (999)	OS: Linux 5.4
+# Nmap done at Sat May 22 21:49:31 2021 -- 1 IP address (1 host up) scanned in 13.80 seconds

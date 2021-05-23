@@ -1,0 +1,64 @@
+body {
+	background-color: #12110c;
+	color: #d0c6a9;
+} 
+
+table {
+	background-color: #312e20;
+	width: 70%;
+	border-collapse: collapse;
+	border: 3px #312e20 solid;
+}
+
+td, th {
+	text-align: left;
+	padding: 5px 20px;
+	background-color: #12110c; 
+	font-weight: normal;
+}
+
+button, input, a, textarea {
+	background-color: #12110c;
+	color: #c3ba9e;
+	border: solid 0.1em;
+	padding: 5px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+}
+
+textarea:hover, a:hover, button:hover, input:hover {
+	color: #ebe2c7;
+}
+
+
+blink {
+  -webkit-animation: 1s linear infinite condemned_blink_effect; /* for Safari 4.0 - 8.0 */
+  animation: 1s linear infinite condemned_blink_effect;
+}
+
+/* for Safari 4.0 - 8.0 */
+@-webkit-keyframes condemned_blink_effect {
+  0% {
+    visibility: hidden;
+  }
+  50% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: visible;
+  }
+}
+
+@keyframes condemned_blink_effect {
+  0% {
+    visibility: hidden;
+  }
+  50% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: visible;
+  }
+}

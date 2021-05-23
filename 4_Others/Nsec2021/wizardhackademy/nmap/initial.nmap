@@ -1,0 +1,24 @@
+# Nmap 7.91 scan initiated Sat May 22 21:49:18 2021 as: nmap -sC -sV -O -oA nmap/initial -Pn -6 9000:470:b2b5:cafe:216:3eff:feb9:98b1
+Unable to send packet in probe_transmission_handler: Operation not permitted (1)
+Nmap scan report for 9000:470:b2b5:cafe:216:3eff:feb9:98b1
+Host is up (0.042s latency).
+Not shown: 999 closed ports
+PORT   STATE SERVICE VERSION
+80/tcp open  http    Apache httpd 2.4.41 ((Ubuntu))
+|_http-server-header: Apache/2.4.41 (Ubuntu)
+|_http-title: 400 Bad Request
+Device type: general purpose
+Running: Linux 5.X
+OS CPE: cpe:/o:linux:linux_kernel:5.4
+OS details: Linux 5.4
+Network Distance: 5 hops
+
+Host script results:
+| address-info: 
+|   IPv6 EUI-64: 
+|     MAC address: 
+|       address: 00:16:3e:b9:98:b1
+|_      manuf: Xensource
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Sat May 22 21:49:31 2021 -- 1 IP address (1 host up) scanned in 13.80 seconds
