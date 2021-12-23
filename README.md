@@ -1,6 +1,9 @@
 # Sec-learning
 
-This project is for learning pentest in a oscp context with Hack The Box. It's based on numerous ressources. Hope you'll enjoy!
+This project is for learning 
+- pentest in a oscp context with Hack The Box. It's based on numerous ressources. Hope you'll enjoy!
+
+- malware analysis
 
 ## OSCP rules
 
