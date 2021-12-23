@@ -1,0 +1,39 @@
+:
+#Lowercase
+l
+#Uppercase
+u
+#Capitalise first character
+c
+#Add '1' to the end
+$1
+#Add '2' to the end
+$2
+#Add '3' to the end
+$3
+#Add '4' to the end
+$4
+#Add '5' to the end
+$5
+#Add '6' to the end
+$6
+#Add '7' to the end
+$7
+#Add '8' to the end
+$8
+#Add '9' to the end
+$9
+#Add '123' to the end
+$1 $2 $3
+#Substitute 'a' for '@'
+sa@
+#Substitute 'a' for '4'
+sa4
+#Substitute 'e' for '3'
+se3
+#substitute 'l' for '1'
+sl1
+#Substitute 'a' for '@', 'e' for '3', 'l' for '1'
+sa@ se3 sl1
+#Substitute 'a' for '4', 'e' for '3', 'l' for '1'
+sa4 se3 sl1
