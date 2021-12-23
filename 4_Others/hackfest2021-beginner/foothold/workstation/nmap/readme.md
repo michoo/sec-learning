@@ -1,0 +1,1 @@
+sudo nmap -sC -sV -O -oA nmap/initial 172.16.2.225 -Pn
